@@ -15,7 +15,6 @@
 ## test
 
 - **phase2**
-  - [sandbox test]()
   - ![](tst.jpg)
 
 ## features
@@ -27,7 +26,7 @@
 ## deploy
 
 - **phase1**
-  - [sandbox]()
+  - [netlify](https://dreamy-noyce-582599.netlify.app/)
 
 ## UML
 
