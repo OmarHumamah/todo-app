@@ -1,0 +1,44 @@
+@import "~normalize.css";
+@import "~@blueprintjs/core/lib/css/blueprint.css";
+@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+
+body{
+    background: url("https://media.istockphoto.com/photos/trees-and-branches-under-the-sun-in-a-green-meadow-with-green-grass-picture-id1218052319") no-repeat;
+    background-size: cover;
+    
+}
+
+#tt{
+    display: inline-block;
+    margin: 2%;
+    width: 31%;
+}
+
+#dd{
+    position: absolute;
+    top: 8%;
+    left: 33%;
+    width: 55%;
+    margin: 2%;
+}
+
+.btn{
+    margin: .5% .8%;
+}
+
+.todo{
+margin-bottom: 8px;
+height: 120px;
+label{
+    color: darken($color: gray, $amount: 20);
+    font-weight: bolder;
+    position: relative;
+    left: 1%;
+}
+.dif{
+    position: relative;
+    left: 85%;
+    bottom: 20%;
+    display: inline-block;
+}
+}
