@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import useForm from '../../hooks/form.js';
-import './style.css'
-
 import { v4 as uuid } from 'uuid';
 import Form from './Form.js';
 import List from './List.js';
@@ -20,11 +18,20 @@ const ToDo = () => {
   const { handleChange, handleSubmit } = useForm(addItem);
 
   function addItem(item) {
-    console.log(item);
+    
     item.id = uuid();
     item.complete = false;
     setList([...list, item]);
   }
+
+  function saveToLocal(){
+    localStorage.setItem('toDoList', JSON.stringify(list))
+  }
+  
+  function saveSettings(){
+    localStorage.setItem('settings', JSON.stringify(settings))
+  }
+  
 
   function deleteItem(id) {
     const items = list.filter( item => item.id !== id );
@@ -45,11 +52,19 @@ const ToDo = () => {
     setList(items);
 
   }
+  useEffect(()=>{
+   let saved = JSON.parse(localStorage.getItem('toDoList'));
+   saved? setList(saved): null;
+
+   let savedSettings = JSON.parse(localStorage.getItem('settings')) 
+   if(savedSettings)  {settings.maximum(savedSettings.numberOf);settings.visible(savedSettings.show); setNumOfItems(savedSettings.numberOf)}
+  },[])
 
   useEffect(() => {
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;
+    saveToLocal()
   }, [list]);
 
    let pageButtons = [];
@@ -62,7 +77,7 @@ const ToDo = () => {
 
   return (
     <>
-      <Header incomplete={incomplete}/>
+      <Header incomplete={incomplete} save={saveSettings} num={setNumOfItems}/>
 
       <div id='tt'>
 
@@ -75,7 +90,6 @@ const ToDo = () => {
       })
       }
         {
-          console.log(pageButtons)}{
           pageButtons.map(i=>{
             return i
           })

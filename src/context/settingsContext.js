@@ -1,12 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 
 export const SettingContext = React.createContext();
 
 
 export default function Show(props) {
+  const [maximum, setMaximum] = useState(2);
+  const [visible, setVisible] = useState(true);
+
     const state = {
-      show: true,
-      numberOf: 3
+      show: visible,
+      numberOf: maximum,
+      maximum: setMaximum,
+      visible: setVisible
     };
   
     return (
