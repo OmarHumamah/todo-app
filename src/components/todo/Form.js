@@ -8,6 +8,7 @@ import {
   InputGroup,
   Divider,
 } from "@blueprintjs/core";
+import Auth from "../auth";
 
 export default function Form(props) {
   return (
@@ -54,16 +55,19 @@ export default function Form(props) {
           </label>
           <Divider />
 
+            <Auth capability="create">
           <label>
+
             <Button
               data-testid="testBtn"
               onClick={props.submit}
               intent="success"
               type="submit"
-            >
+              >
               Add Item
             </Button>
           </label>
+              </Auth>
         </FormGroup>
       </Card>
     </>

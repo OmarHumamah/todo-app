@@ -4,12 +4,14 @@ import { v4 as uuid } from 'uuid';
 import Form from './Form.js';
 import List from './List.js';
 import Header from './Header.js';
-import { Button, } from '@blueprintjs/core';
+import { Button, Card, Elevation } from '@blueprintjs/core';
 import { SettingContext } from "../../context/settingsContext";
+import { LoginContext } from '../../context/context';
+import { When } from 'react-if';
 
 
 const ToDo = () => {
- 
+  const context = useContext(LoginContext);
   const settings = useContext(SettingContext);
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
@@ -37,9 +39,7 @@ const ToDo = () => {
     const items = list.filter( item => item.id !== id );
     setList(items);
   }
-  function next(){
-    setNumOfItems()
-  }
+  
   function toggleComplete(id) {
 
     const items = list.map( item => {
@@ -79,6 +79,8 @@ const ToDo = () => {
     <>
       <Header incomplete={incomplete} save={saveSettings} num={setNumOfItems}/>
 
+      <When condition={context.loggedIn} >
+
       <div id='tt'>
 
       <Form  submit={handleSubmit} change={handleChange}/>
@@ -86,15 +88,25 @@ const ToDo = () => {
       
       <div id='dd'>
       {list.slice(numOfItems-settings.numberOf, numOfItems).map(item=>{
-        return <List item={item} complete={toggleComplete}/>
+        return <List item={item} complete={toggleComplete} delete={deleteItem}/>
       })
-      }
+    }
         {
           pageButtons.map(i=>{
             return i
           })
         }
       </div>
+        </When>
+
+        <When condition={!context.loggedIn}> 
+           <div id="welcome">
+           <Card elevation={Elevation.THREE}>
+            <h1>Welcome to ToDo App</h1>
+            <h3>Please login to access</h3>
+           </Card>
+           </div>
+        </When>
     </>
   );
 };

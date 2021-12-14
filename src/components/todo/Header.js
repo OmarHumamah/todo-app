@@ -3,10 +3,13 @@ import { Button, Navbar, Switch } from "@blueprintjs/core";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { SettingContext } from "../../context/settingsContext";
+import Login from "../login";
+import { When } from "react-if";
+import { LoginContext } from "../../context/context";
 
 export default function Header(props) {
   const settings = useContext(SettingContext);
-
+  const context = useContext(LoginContext);
 
   const [show, setShow] = useState(false);
   return (
@@ -15,7 +18,9 @@ export default function Header(props) {
         <Navbar>
           <Navbar.Group>
             <Navbar.Heading>
+              <When condition={context.loggedIn}>
               <h3>To Do List: {props.incomplete} items pending</h3>
+              </When>
             </Navbar.Heading>
             <Navbar.Divider />
             <Button className="bp3-minimal" icon="home" text="Home" />
@@ -25,6 +30,7 @@ export default function Header(props) {
               text="Settings"
               onClick={() => setShow(!show)}
             />
+            <Login/>
             <Modal show={show}>
               <Modal.Header>
                 <Modal.Title>Settings</Modal.Title>
