@@ -42,3 +42,32 @@ label{
     display: inline-block;
 }
 }
+
+#loginDiv{
+    display: inline-block;
+    position: relative;
+    left: 95%;
+    top: 15%;
+    label{
+       margin-right: 15px ;
+    }
+    
+}
+
+#welcome{
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    text-align: center;
+    width: 50rem;
+}
+
+#out{
+    position: relative;
+    left: 100%;
+}
+
+.dlt{
+    position: sticky;
+    left: 90%;
+}
